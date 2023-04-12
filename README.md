@@ -1,5 +1,5 @@
 <h1 align="center">
-  <a href="" target="_blank">
+  <a href="https://note-astro.vercel.app/" target="_blank">
     My Note by Astro
   </a>
 </h1>
