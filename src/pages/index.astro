@@ -9,7 +9,6 @@ const entries = await contentfulClient.getEntries<SiteMeta>({
 });
 const masta = entries.items.find((item) => item.fields.name == 'Masta')?.fields
 const description = masta?.data.find((c) => c.key == 'description')?.value
-console.log(description)
 ---
 
 <html lang="en">
@@ -19,6 +18,7 @@ console.log(description)
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Note -- Create, Connect, and Provide.</title>
+		<meta name="description" content={description} />
 	</head>
 	<body>
 		<h1>Note</h1>
