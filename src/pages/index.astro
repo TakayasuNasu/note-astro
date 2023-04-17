@@ -1,4 +1,15 @@
 ---
+import { contentfulClient } from "../lib/contentful";
+interface SiteMeta {
+    name: string,
+    data: Array<{key: string; value: string}>
+}
+const entries = await contentfulClient.getEntries<SiteMeta>({
+  content_type: "siteMasta",
+});
+const masta = entries.items.find((item) => item.fields.name == 'Masta')?.fields
+const description = masta?.data.find((c) => c.key == 'description')?.value
+console.log(description)
 ---
 
 <html lang="en">
