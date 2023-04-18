@@ -6,7 +6,7 @@ type SiteMetaSkeleton = {
   contentTypeId: 'siteMasta'
   fields: {
     name: EntryFieldTypes.Text
-    data: EntryFieldTypes.Object
+    data: EntryFieldTypes.Object<Array<{ [Key in string]: string }>>
   }
 }
 
