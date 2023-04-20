@@ -1,6 +1,12 @@
 module.exports = {
   ignorePatterns: ['*.d.ts'],
-  extends: ['eslint:recommended', 'plugin:import/typescript', 'plugin:astro/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:import/typescript',
+    'plugin:astro/recommended',
+    'prettier',
+    'prettier/@typescript-eslint'
+  ],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -32,8 +38,18 @@ module.exports = {
       },
     },
     {
-      files: ['*.ts'],
-      parser: '@typescript-eslint/parser',
+      files: ['**/*.ts', '**/*.tsx'],
+      extends: [
+        'plugin:prettier/recommende'
+      ],
+      rules: {
+        'prettier/prettier': [
+          'error',
+          {
+            'singleQuote': true,
+          }
+        ],
+      },
     },
   ],
 }

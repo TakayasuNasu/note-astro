@@ -1,6 +1,11 @@
 ---
-import { contentfulClient } from '../lib/contentful'
 import type { EntryFieldTypes } from 'contentful/dist/types'
+
+// library
+import { contentfulClient } from '@/lib/contentful'
+
+// types
+import type { InsightSkeleton } from '@/lib/contentful'
 
 type SiteMetaSkeleton = {
   contentTypeId: 'siteMasta'
@@ -10,12 +15,24 @@ type SiteMetaSkeleton = {
   }
 }
 
-const entries = await contentfulClient.getEntries<SiteMetaSkeleton>({
+const entriesSiteMeta = await contentfulClient.getEntries<SiteMetaSkeleton>({
   content_type: 'siteMasta',
 })
 
-const masta = entries.items.find(item => item.fields.name == 'Masta')?.fields
+const masta = entriesSiteMeta.items.find(item => item.fields.name == 'Masta')?.fields
 const description = masta?.data?.find(c => c.key == 'description')?.value
+
+const entriesInsight = await contentfulClient.getEntries<InsightSkeleton>({
+  content_type: 'insight',
+})
+
+const posts = entriesInsight.items.map(item => {
+  const { name, slug } = item.fields
+  return {
+    name,
+    slug,
+  }
+})
 ---
 
 <html lang="en">
@@ -34,6 +51,20 @@ const description = masta?.data?.find(c => c.key == 'description')?.value
       <li>setting up esling</li>
       <li>make alias path</li>
       <li>add tailwindcss</li>
+    </ul>
+
+    <ul class="posts">
+      {
+        posts.map(post => {
+          return (
+            <li>
+              <a href={`/n/${post.slug}`}>
+                {post.name} - {post.slug}
+              </a>
+            </li>
+          )
+        })
+      }
     </ul>
   </body>
 </html>

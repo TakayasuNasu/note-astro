@@ -1,0 +1,31 @@
+---
+import { contentfulClient } from '@/lib/contentful'
+
+// types
+import type { InsightSkeleton } from '@/lib/contentful'
+
+export async function getStaticPaths() {
+  const entries = await contentfulClient.getEntries<InsightSkeleton>({
+    content_type: 'insight',
+  })
+
+  const pages = entries.items.map(item => ({
+    params: { slug: item.fields.slug },
+    props: {
+      title: item.fields.name,
+    },
+  }))
+
+  return pages
+}
+const { title } = Astro.props
+---
+
+<html lang="en">
+  <head>
+    <title>{title}</title>
+  </head>
+  <body>
+    <h1>{title}</h1>
+  </body>
+</html>
