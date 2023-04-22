@@ -1,19 +1,15 @@
 ---
-import type { EntryFieldTypes } from 'contentful/dist/types'
+// layout
+import Layout from '@layouts/Layout.astro'
 
 // library
 import { contentfulClient } from '@/lib/contentful'
 
 // types
-import type { InsightSkeleton } from '@/lib/contentful'
+import type { InsightSkeleton, SiteMetaSkeleton } from '@/lib/contentful'
 
-type SiteMetaSkeleton = {
-  contentTypeId: 'siteMasta'
-  fields: {
-    name: EntryFieldTypes.Text
-    data: EntryFieldTypes.Object<Array<{ [Key in string]: string }>>
-  }
-}
+// global style
+import '@/styles/global.css'
 
 const entriesSiteMeta = await contentfulClient.getEntries<SiteMetaSkeleton>({
   content_type: 'siteMasta',
@@ -35,36 +31,26 @@ const posts = entriesInsight.items.map(item => {
 })
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Note -- Create, Connect, and Provide.</title>
-    <meta name="description" content={description} />
-  </head>
-  <body>
-    <h1>Note</h1>
+<Layout title="Takayasu Nasu | note" description={description}>
+  <h1>Note</h1>
 
-    <ul class="font-black">
-      <li>setting up esling</li>
-      <li>make alias path</li>
-      <li>add tailwindcss</li>
-    </ul>
+  <ul class="font-black">
+    <li>setting up esling</li>
+    <li>make alias path</li>
+    <li>add tailwindcss</li>
+  </ul>
 
-    <ul class="posts">
-      {
-        posts.map(post => {
-          return (
-            <li>
-              <a href={`/n/${post.slug}`}>
-                {post.name} - {post.slug}
-              </a>
-            </li>
-          )
-        })
-      }
-    </ul>
-  </body>
-</html>
+  <ul class="posts">
+    {
+      posts.map(post => {
+        return (
+          <li>
+            <a href={`/n/${post.slug}`}>
+              {post.name} - {post.slug}
+            </a>
+          </li>
+        )
+      })
+    }
+  </ul>
+</Layout>

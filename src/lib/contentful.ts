@@ -1,6 +1,14 @@
 import contentful from 'contentful'
 import type { EntryFieldTypes } from 'contentful/dist/types'
 
+export type SiteMetaSkeleton = {
+  contentTypeId: 'siteMasta'
+  fields: {
+    name: EntryFieldTypes.Text
+    data: EntryFieldTypes.Object<Array<{ [Key in string]: string }>>
+  }
+}
+
 export interface InsightSkeleton {
   contentTypeId: 'insight'
   fields: {

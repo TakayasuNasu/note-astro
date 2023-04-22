@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets'
+
+// assets
+import logo from '@/assets/images/logo-light.svg'
+---
+
+<header>
+  <ul class="nav">
+    <li class="logo">
+      <a href="/" class="logo">
+        <figure>
+          <Image src={logo.src} width={86} height={20} alt={`Insight`} />
+        </figure>
+      </a>
+    </li>
+  </ul>
+</header>
+
+<style>
+  header {
+    padding-block: 20px;
+    padding-inline: 16px;
+
+    @media (min-width: 768px) {
+      padding-inline: 24px;
+    }
+
+    background-color: var(--sub-bg-colour);
+  }
+</style>

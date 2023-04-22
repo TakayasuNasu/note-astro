@@ -1,0 +1,72 @@
+html {
+  --text-colour: #FFFFFF;
+  --sub-text-colour: #FFF5FF;
+  --link-colour: #14FFEC;
+  --background-colour: #212121;
+  --sub-bg-colour: #323232;
+  --border-colour: #323232;
+  --gradation-bg: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+  --font-size-tiny: 12px;
+  --font-size-small: 12px;
+  --font-size-medium: 12px;
+  --font-size-large: 14px;
+  --font-size-huge: 16px;
+  --heading-size-small: 20px;
+  --heading-size-medium: 20px;
+  --heading-size-large: 20px;
+}
+
+@media (min-width: 768px) {
+  html {
+    --font-size-tiny: 12px;
+    --font-size-small: 12px;
+    --font-size-medium: 14px;
+    --font-size-large: 14px;
+    --font-size-huge: 16px;
+    --heading-size-small: 24px;
+    --heading-size-medium: 24px;
+    --heading-size-large: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    --font-size-tiny: 12px;
+    --font-size-small: 14px;
+    --font-size-medium: 16px;
+    --font-size-large: 18px;
+    --font-size-huge: 20px;
+    --heading-size-small: 24px;
+    --heading-size-medium: 26px;
+    --heading-size-large: 28px;
+  }
+}
+
+@media (min-width: 1280px) {
+  html {
+    --font-size-tiny: 12px;
+  }
+}
+
+@media (min-width: 1536px) {
+  html {
+    --font-size-tiny: 12px;
+  }
+}
+
+html.light {
+  --text-colour: #212121;
+  --background-colour: #FFF5FF;
+}
+
+html {
+  color: var(--text-colour);
+  background-color: var(--background-colour);
+}
+
+body {
+  font-size: 16px;
+  font-weight: 500;
+  font-family:  "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  line-height: 1;
+}
