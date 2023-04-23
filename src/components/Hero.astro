@@ -1,0 +1,20 @@
+---
+import { Image } from 'astro:assets'
+
+// assets
+import hero from '@/assets/images/hero01.png'
+---
+
+<figure>
+  <Image src={hero.src} width={hero.width} height={hero.height} alt={`Hero`} class="object-cover w-full h-full" />
+</figure>
+
+<style lang="scss">
+  figure {
+    aspect-ratio: 2.27/1;
+
+    @media (min-width: 1024px) {
+      aspect-ratio: 6/1;
+    }
+  }
+</style>

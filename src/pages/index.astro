@@ -8,6 +8,11 @@ import { contentfulClient } from '@/lib/contentful'
 // types
 import type { InsightSkeleton, SiteMetaSkeleton } from '@/lib/contentful'
 
+// components
+import Hero from '@/components/Hero.astro'
+import Info from '@/components/Info.astro'
+import Timeline from '@/components/Timeline.astro'
+
 // global style
 import '@/styles/global.css'
 
@@ -23,34 +28,55 @@ const entriesInsight = await contentfulClient.getEntries<InsightSkeleton>({
 })
 
 const posts = entriesInsight.items.map(item => {
-  const { name, slug } = item.fields
+  const { name, slug, featured, primaryHeading, publishedDate } = item.fields
   return {
     name,
     slug,
+    featured,
+    primaryHeading,
+    publishedDate,
   }
 })
 ---
 
 <Layout title="Takayasu Nasu | note" description={description}>
-  <h1>Note</h1>
+  <Hero />
+
+  <ul class="contents-list lg:grid">
+    <li>
+      <Info {...{ type: 'index', createBy: '那須 毅康(Takayasu Nasu - Tack)' }} />
+    </li>
+    <li class="timeline-wrapper">
+      <Timeline {...{ posts }} />
+    </li>
+  </ul>
 
   <ul class="font-black">
     <li>setting up esling</li>
     <li>make alias path</li>
     <li>add tailwindcss</li>
   </ul>
-
-  <ul class="posts">
-    {
-      posts.map(post => {
-        return (
-          <li>
-            <a href={`/n/${post.slug}`}>
-              {post.name} - {post.slug}
-            </a>
-          </li>
-        )
-      })
-    }
-  </ul>
 </Layout>
+
+<style lang="scss">
+  ul.contents-list {
+    column-gap: 36px;
+    margin-inline: auto;
+    margin-top: -32px;
+    width: 94%;
+
+    @media (min-width: 768px) {
+      width: 90%;
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: 384px auto;
+      margin-top: 32px;
+      width: min(94%, 1356px);
+    }
+  }
+
+  li.timeline-wrapper {
+    container: timeline-wrapper/inline-size;
+  }
+</style>

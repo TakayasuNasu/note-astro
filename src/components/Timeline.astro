@@ -1,0 +1,48 @@
+---
+import Card from '@/components/Card.astro'
+
+interface Posts
+  extends Array<{
+    slug: string
+    featured: boolean
+    primaryHeading: string
+    publishedDate: `${number}-${number}-${number}T${number}:${number}:${number}Z`
+  }> {}
+
+export interface Props {
+  posts: Posts
+}
+
+let { posts } = Astro.props
+const maped = posts.map((data, i) => ({ i, value: data.featured }))
+posts = maped
+  .sort((a, b) => {
+    if (a.value) return -1
+    return 0
+  })
+  .map(v => posts[v.i])
+---
+
+<ul class="timeline grid gap-6">
+  {
+    posts.map(post => {
+      return (
+        <li>
+          <Card {...{ post }} />
+        </li>
+      )
+    })
+  }
+</ul>
+
+<style lang="scss">
+  ul.timeline {
+    @container timeline-wrapper (min-width: 600px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @container timeline-wrapper (min-width: 900px) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+</style>

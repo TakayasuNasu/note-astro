@@ -8,8 +8,8 @@ import logo from '@/assets/images/logo-light.svg'
 <header>
   <ul class="nav">
     <li class="logo">
-      <a href="/" class="logo">
-        <figure>
+      <a href="/" class="logo inline-block">
+        <figure class="w-max">
           <Image src={logo.src} width={86} height={20} alt={`Insight`} />
         </figure>
       </a>
@@ -17,7 +17,7 @@ import logo from '@/assets/images/logo-light.svg'
   </ul>
 </header>
 
-<style>
+<style lang="scss">
   header {
     padding-block: 20px;
     padding-inline: 16px;

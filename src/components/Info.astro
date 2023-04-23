@@ -1,0 +1,69 @@
+---
+import { Image } from 'astro:assets'
+
+// assets
+import face from '@/assets/images/face-photo.png'
+
+export interface Props {
+  type: 'index' | 'single'
+  createBy: string
+}
+
+const { type, createBy } = Astro.props
+---
+
+<div class="card">
+  <ul class="info-list grid">
+    <li class="buttons"></li>
+
+    <li class="heading">
+      <dl data-type={type} class="grid">
+        <dt>
+          <figure class="rounded-full overflow-hidden w-max">
+            <Image src={face.src} width={64} height={64} alt={`Insight`} />
+          </figure>
+        </dt>
+        <dd>
+          <h1>{createBy}</h1>
+        </dd>
+      </dl>
+    </li>
+
+    <li class="desc">
+      <p>
+        あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波
+      </p>
+    </li>
+
+    <li class="follow"></li>
+
+    <li class="social-media"></li>
+  </ul>
+</div>
+
+<style lang="scss">
+  div.card {
+    @media (min-width: 1024px) {
+      border: solid 1px var(--border-colour);
+    }
+  }
+
+  ul.info-list {
+    row-gap: 16px;
+  }
+
+  h1 {
+    font-size: var(--font-size-large);
+    font-weight: 700;
+  }
+
+  dl {
+    row-gap: 16px;
+  }
+
+  li.desc {
+    p {
+      font-size: 14px;
+    }
+  }
+</style>

@@ -14,6 +14,9 @@ export interface InsightSkeleton {
   fields: {
     name: EntryFieldTypes.Text
     slug: EntryFieldTypes.Text
+    featured: EntryFieldTypes.Boolean
+    primaryHeading: EntryFieldTypes.Text
+    publishedDate: EntryFieldTypes.Date
   }
 }
 

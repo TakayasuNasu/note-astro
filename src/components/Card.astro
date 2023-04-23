@@ -1,0 +1,41 @@
+---
+interface Post {
+  slug: string
+  featured: boolean
+  primaryHeading: string
+  publishedDate: `${number}-${number}-${number}T${number}:${number}:${number}Z`
+}
+
+export interface Props {
+  post: Post
+}
+
+const {
+  post: { slug, primaryHeading },
+} = Astro.props
+---
+
+<a href={`/n/${slug}`} class="grid">
+  <figure></figure>
+  <h3>{primaryHeading}</h3>
+  <p></p>
+</a>
+
+<style lang="scss">
+  a {
+    row-gap: 16px;
+
+    * {
+      color: var(--text-colour);
+    }
+  }
+
+  figure {
+    aspect-ratio: 16/9;
+    background-color: var(--accent-light);
+  }
+
+  h3 {
+    font-size: var(--font-size-large);
+  }
+</style>
