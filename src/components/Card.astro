@@ -1,22 +1,30 @@
 ---
-interface Post {
-  slug: string
-  featured: boolean
-  primaryHeading: string
-  publishedDate: `${number}-${number}-${number}T${number}:${number}:${number}Z`
-}
+import { Image } from 'astro:assets'
+import type { Post } from '@/lib/contentful'
 
 export interface Props {
   post: Post
 }
 
 const {
-  post: { slug, primaryHeading },
+  post: { slug, primaryHeading, heroImage },
 } = Astro.props
 ---
 
 <a href={`/n/${slug}`} class="grid">
-  <figure></figure>
+  <figure>
+    {
+      heroImage.fields.file && (
+        <Image
+          src={heroImage.fields.file.url}
+          width={heroImage.fields.file.details.image?.width || 200}
+          height={heroImage.fields.file.details.image?.height || 100}
+          alt={`Hero`}
+          class="object-cover w-full h-full"
+        />
+      )
+    }
+  </figure>
   <h3>{primaryHeading}</h3>
   <p></p>
 </a>
@@ -32,7 +40,6 @@ const {
 
   figure {
     aspect-ratio: 16/9;
-    background-color: var(--accent-light);
   }
 
   h3 {

@@ -28,10 +28,11 @@ const entriesInsight = await contentfulClient.getEntries<InsightSkeleton>({
 })
 
 const posts = entriesInsight.items.map(item => {
-  const { name, slug, featured, primaryHeading, publishedDate } = item.fields
+  const { name, slug, heroImage, featured, primaryHeading, publishedDate } = item.fields
   return {
     name,
     slug,
+    heroImage,
     featured,
     primaryHeading,
     publishedDate,
@@ -39,7 +40,7 @@ const posts = entriesInsight.items.map(item => {
 })
 ---
 
-<Layout title="Takayasu Nasu | note" description={description}>
+<Layout title="Takayasu Nasu | insight" description={description}>
   <Hero />
 
   <ul class="contents-list lg:grid">

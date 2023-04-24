@@ -15,7 +15,7 @@ html {
   --font-size-huge: 18px;
   --heading-size-small: 20px;
   --heading-size-medium: 20px;
-  --heading-size-large: 20px;
+  --heading-size-large: clamp(18px, 22 / 426 * 100vw, 22px);;
 }
 
 /* md: */

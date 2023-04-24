@@ -1,5 +1,6 @@
 import contentful from 'contentful'
 import type { EntryFieldTypes } from 'contentful/dist/types'
+import type { AssetFields } from 'contentful'
 
 export type SiteMetaSkeleton = {
   contentTypeId: 'siteMasta'
@@ -14,10 +15,19 @@ export interface InsightSkeleton {
   fields: {
     name: EntryFieldTypes.Text
     slug: EntryFieldTypes.Text
+    heroImage: AssetFields
     featured: EntryFieldTypes.Boolean
     primaryHeading: EntryFieldTypes.Text
     publishedDate: EntryFieldTypes.Date
   }
+}
+
+export interface Post {
+  slug: string
+  featured: boolean
+  heroImage: { fields: AssetFields }
+  primaryHeading: string
+  publishedDate: `${number}-${number}-${number}T${number}:${number}:${number}Z`
 }
 
 export const contentfulClient = contentful.createClient({

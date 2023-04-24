@@ -1,13 +1,8 @@
 ---
 import Card from '@/components/Card.astro'
+import type { Post } from '@/lib/contentful'
 
-interface Posts
-  extends Array<{
-    slug: string
-    featured: boolean
-    primaryHeading: string
-    publishedDate: `${number}-${number}-${number}T${number}:${number}:${number}Z`
-  }> {}
+interface Posts extends Array<Post> {}
 
 export interface Props {
   posts: Posts

@@ -1,8 +1,16 @@
 ---
 import { contentfulClient } from '@/lib/contentful'
+import { Image } from 'astro:assets'
+import type { AssetFields } from 'contentful'
+
+// layout
+import Layout from '@layouts/Layout.astro'
 
 // types
 import type { InsightSkeleton } from '@/lib/contentful'
+
+// global style
+import '@/styles/global.css'
 
 export async function getStaticPaths() {
   const entries = await contentfulClient.getEntries<InsightSkeleton>({
@@ -12,20 +20,60 @@ export async function getStaticPaths() {
   const pages = entries.items.map(item => ({
     params: { slug: item.fields.slug },
     props: {
-      title: item.fields.name,
+      heading: item.fields.primaryHeading,
+      heroImage: item.fields.heroImage as { fields: AssetFields },
     },
   }))
 
   return pages
 }
-const { title } = Astro.props
+const { heading, heroImage } = Astro.props
 ---
 
-<html lang="en">
-  <head>
-    <title>{title}</title>
-  </head>
-  <body>
-    <h1>{title}</h1>
-  </body>
-</html>
+<Layout title={`${heading} | Takayasu Nasu | insight`} description="">
+  <article>
+    <figure>
+      {
+        heroImage.fields.file && (
+          <Image
+            src={heroImage.fields.file.url}
+            width={heroImage.fields.file.details.image?.width || 200}
+            height={heroImage.fields.file.details.image?.height || 100}
+            alt={`Hero`}
+            class="object-cover w-full h-full"
+          />
+        )
+      }
+    </figure>
+    <h1 class="font-bold">{heading}</h1>
+  </article>
+</Layout>
+
+<style lang="scss">
+  article {
+    margin-inline: auto;
+    width: 94%;
+
+    @media (min-width: 768px) {
+      width: 688px;
+    }
+
+    @media (min-width: 1024px) {
+      width: 620px;
+    }
+  }
+  figure {
+    margin-inline: calc(50% - 50vw);
+    aspect-ratio: 39/20;
+
+    @media (min-width: 1024px) {
+      margin-top: 48px;
+      margin-inline: unset;
+    }
+  }
+
+  h1 {
+    margin-top: min(14vw, 64px);
+    font-size: var(--heading-size-large);
+  }
+</style>
