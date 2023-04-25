@@ -19,6 +19,7 @@ export interface InsightSkeleton {
     featured: EntryFieldTypes.Boolean
     primaryHeading: EntryFieldTypes.Text
     publishedDate: EntryFieldTypes.Date
+    body: EntryFieldTypes.Text
   }
 }
 

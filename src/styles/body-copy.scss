@@ -1,0 +1,285 @@
+div.body-copy {
+  & > * {
+    margin-top: 36px;
+
+    &:first-child {
+      margin-top: unset;
+    }
+  }
+
+  h2, h3, h4,h5,h6 {
+    font-size: var(--heading-size-large);
+    font-weight: 700;
+  }
+
+  p {
+    font-size: var(--font-size-large);
+    line-height: 2;
+  }
+
+ul,
+ol {
+  margin: 1.4rem 0;
+  line-height: 1.7;
+  & > li {
+    margin: 0.4rem 0;
+  }
+  ul,
+  ol {
+    margin: 0.2em 0;
+  }
+  p {
+    margin: 0;
+  }
+}
+
+ul {
+  padding-left: 1.8em;
+  & > li {
+    list-style: disc;
+    &::marker {
+      font-size: 1.1em;
+      color: var(--accent-dark);
+    }
+  }
+}
+
+ol {
+  padding-left: 1.7em;
+  & > li {
+    list-style: decimal;
+    padding-left: 0.2em;
+    &::marker {
+      color: var(--accent-dark);
+      font-weight: 600;
+      letter-spacing: -0.05em;
+    }
+  }
+}
+
+  table {
+    margin: 1.2rem auto;
+    width: auto;
+    border-collapse: collapse;
+    font-size: 0.95em;
+    line-height: 1.5;
+    word-break: normal;
+    display: block;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  th,
+  td {
+    padding: 0.5rem;
+    border: solid 1px var(--text-colour);
+  }
+  th {
+    font-weight: 700;
+    background-color: var(--accent-dark);
+  }
+}
+
+aside.msg {
+  display: flex;
+  align-items: flex-start;
+  padding: 1.4em 1em;
+  border-radius: 10px;
+  background: var(--accent-dark);
+  font-size: 0.94em;
+  line-height: 1.6;
+
+  &.alert {
+    color: var(--background-colour);
+    background: #ffeff2;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+}
+
+.msg-symbol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  width: 2.0rem;
+  height: 2.0rem;
+  border-radius: 99rem;
+  background-color: var(--accent-light);
+  color: #ffffff;
+}
+
+aside.msg.alert .msg-symbol {
+  background-color: #ff7670;
+}
+
+.msg-content {
+  flex: 1;
+  margin-left: 0.6em;
+  min-width: 0;
+
+  &>* {
+    margin: 0.7rem 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+span.embed-block {
+  display: block;
+  width: 100%;
+}
+
+.embed-slideshare,
+.embed-speakerdeck,
+.embed-codepen,
+.embed-jsfiddle,
+.embed-youtube,
+.embed-stackblitz {
+  padding-bottom: calc(56.25% + 38px);
+  position: relative;
+  width: 100%;
+  height: 0;
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+}
+
+.zenn-embedded {
+  iframe {
+    width: 100%;
+    display: block;
+  }
+}
+
+.zenn-embedded-link-card {
+  margin: 1rem auto;
+  iframe {
+    height: 125px;
+  }
+}
+
+.zenn-embedded-tweet,
+.zenn-embedded-mermaid,
+.zenn-embedded-github,
+.zenn-embedded-gist {
+  margin: 1.5rem auto;
+}
+
+pre[class*='language-'] {
+  position: relative;
+}
+.token.namespace {
+  opacity: 0.7;
+}
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #94a1b3;
+}
+.token.operator,
+.token.boolean,
+.token.number {
+  color: #ffc56d;
+}
+.token.attr-name,
+.token.string {
+  color: #ffc56d;
+}
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #ffc56d;
+}
+.token.selector {
+  color: #ff8fa3;
+}
+.token.atrule,
+.token.attr-value,
+.token.keyword,
+.token.important {
+  color: #ff8fa3;
+}
+
+.token.deleted {
+  color: #ff8fa3;
+}
+.token.inserted {
+  color: #b4ff9b;
+}
+.token.deleted:not(.prefix) {
+  background: rgba(218, 54, 50, 0.2);
+  color: inherit;
+  display: block;
+}
+// ref: https://github.com/zenn-dev/zenn-editor/issues/148
+.token.prefix {
+  user-select: none;
+}
+
+.token.inserted:not(.prefix) {
+  background: rgba(0, 146, 27, 0.2);
+  color: inherit;
+  display: block;
+}
+
+.token.coord {
+  color: #aad4ff;
+}
+
+.token.regex,
+.token.statement {
+  color: #ffc56d;
+}
+.token.placeholder,
+.token.variable {
+  color: #fff;
+}
+.token.important,
+.token.statement,
+.token.bold {
+  font-weight: 700;
+}
+.token.punctuation {
+  color: #939bc1;
+}
+.token.entity {
+  cursor: help;
+}
+.token.italic {
+  font-style: italic;
+}
+.token.tag,
+.token.property,
+.token.function {
+  color: #38c7ff;
+}
+.token.attr-name {
+  color: #ff8fa3;
+}
+.token.attr-value {
+  color: #ffc56d;
+}
+.token.style,
+.token.script {
+  color: #ffc56d;
+}
+.token.script .token.keyword {
+  color: #ffc56d;
+}

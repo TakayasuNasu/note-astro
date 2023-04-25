@@ -1,0 +1,66 @@
+---
+import { Icon } from 'astro-icon'
+
+const year = new Date().getFullYear()
+---
+
+<footer class="grid">
+  <p class="text-center">Takayasu Nasu {year}. All rights reserved.</p>
+  <ul class="social-media grid">
+    <li>
+      <a href="https://www.facebook.com/takayasu.nasu.1" rel="noreferrer noopener" target="_blank">
+        <Icon name="ic:baseline-facebook" />
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.facebook.com/takayasu.nasu.1" rel="noreferrer noopener" target="_blank">
+        <Icon name="mdi:twitter" />
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.facebook.com/takayasu.nasu.1" rel="noreferrer noopener" target="_blank">
+        <Icon name="ion:logo-linkedin" />
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.facebook.com/takayasu.nasu.1" rel="noreferrer noopener" target="_blank">
+        <Icon name="mdi:github" />
+      </a>
+    </li>
+  </ul>
+</footer>
+
+<style lang="scss">
+  footer {
+    row-gap: 24px;
+    margin-block: 64px 32px;
+  }
+
+  p {
+    font-size: var(--font-size-large);
+  }
+
+  ul.social-media {
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 24px;
+    margin-inline: auto;
+    width: 60%;
+
+    @media (min-width: 768px) {
+      column-gap: 32px;
+      width: 40%;
+    }
+
+    @media (min-width: 1024px) {
+      column-gap: 48px;
+      width: min(30%, 300px);
+    }
+  }
+
+  a {
+    color: unset !important;
+  }
+</style>

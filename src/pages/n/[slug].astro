@@ -2,6 +2,7 @@
 import { contentfulClient } from '@/lib/contentful'
 import { Image } from 'astro:assets'
 import type { AssetFields } from 'contentful'
+import lib from 'zenn-markdown-html'
 
 // layout
 import Layout from '@layouts/Layout.astro'
@@ -11,6 +12,16 @@ import type { InsightSkeleton } from '@/lib/contentful'
 
 // global style
 import '@/styles/global.css'
+import '@/styles/body-copy.scss'
+
+type MarkdownHtml = (text: string, options?: {}) => string
+type MarkdownHtmlAtBuild = { default: MarkdownHtml }
+
+let markdownHtml: MarkdownHtml = lib
+
+if (typeof lib !== 'function') {
+  markdownHtml = (lib as MarkdownHtmlAtBuild).default
+}
 
 export async function getStaticPaths() {
   const entries = await contentfulClient.getEntries<InsightSkeleton>({
@@ -22,12 +33,16 @@ export async function getStaticPaths() {
     props: {
       heading: item.fields.primaryHeading,
       heroImage: item.fields.heroImage as { fields: AssetFields },
+      body: item.fields.body,
     },
   }))
 
   return pages
 }
-const { heading, heroImage } = Astro.props
+const { heading, heroImage, body } = Astro.props
+const html = markdownHtml(body, {
+  embedOrigin: 'https://embed.zenn.studio',
+})
 ---
 
 <Layout title={`${heading} | Takayasu Nasu | insight`} description="">
@@ -45,7 +60,12 @@ const { heading, heroImage } = Astro.props
         )
       }
     </figure>
+
     <h1 class="font-bold">{heading}</h1>
+
+    <div class="body-copy">
+      <Fragment set:html={html} />
+    </div>
   </article>
 </Layout>
 
@@ -75,5 +95,9 @@ const { heading, heroImage } = Astro.props
   h1 {
     margin-top: min(14vw, 64px);
     font-size: var(--heading-size-large);
+  }
+
+  div.body-copy {
+    margin-top: 36px;
   }
 </style>
