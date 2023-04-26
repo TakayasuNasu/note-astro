@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets'
+import { Icon } from 'astro-icon'
+
+// assets
+import face from '@/assets/images/face-photo.webp'
+
+export interface Props {
+  slug: string
+  publishedDate: `${number}-${number}-${number}T${number}:${number}:${number}Z`
+}
+
+const { slug, publishedDate } = Astro.props
+---
+
+<header>
+  <ul class="list-wrapper flex items-center justify-between">
+    <li class="flex items-center">
+      <figure class="rounded-full overflow-hidden w-max">
+        <Image src={face.src} width={32} height={32} alt={`Insight`} />
+      </figure>
+      <dl>
+        <dt>那須 毅康(Takayasu Nasu - Tack)</dt>
+        <dd>
+          <time>{publishedDate}</time>
+        </dd>
+      </dl>
+    </li>
+
+    <li>
+      <ul class="social-media flex items-center">
+        <li>
+          <a href={`http://www.facebook.com/share.php?u=${Astro.url}`} rel="noreferrer noopener" target="_blank">
+            <Icon name="ic:baseline-facebook" />
+          </a>
+        </li>
+
+        <li>
+          <a href={`https://twitter.com/share?url=${Astro.url}`} rel="noreferrer noopener" target="_blank">
+            <Icon name="mdi:twitter" />
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</header>
+
+<style lang="scss">
+  ul.list-wrapper {
+    margin-top: 24px;
+  }
+
+  figure {
+    margin-right: 8px;
+  }
+
+  dl {
+    font-size: 12px;
+  }
+
+  ul.social-media {
+    column-gap: 8px;
+
+    li {
+      width: 24px;
+      aspect-ratio: 1/1;
+
+      a {
+        color: var(--text-colour) !important;
+      }
+    }
+  }
+</style>

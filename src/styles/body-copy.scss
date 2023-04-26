@@ -78,6 +78,40 @@ ol {
     font-weight: 700;
     background-color: var(--accent-dark);
   }
+
+  code,
+  .code-block-filename {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace,
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .code-block-filename {
+    display: table;
+    max-width: 100%;
+    background: var(--accent-dark);
+    font-size: 12px;
+    line-height: 1.3;
+    border-radius: 6px 6px 0 0;
+    padding: 6px 12px 20px;
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom: 20px;
+    padding-left: 12px;
+    margin-bottom: -16px;
+}
+
+  pre {
+    display: flex;
+    overflow-x: auto;
+    background-color: var(--sub-bg-colour);
+    border-radius: 0.7em;
+    border-top-left-radius: 0;
+
+    code {
+      padding: 1.1rem;
+    }
+  }
 }
 
 aside.msg {
@@ -183,33 +217,40 @@ span.embed-block {
 pre[class*='language-'] {
   position: relative;
 }
+
 .token.namespace {
   opacity: 0.7;
 }
+
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
   color: #94a1b3;
 }
+
 .token.operator,
 .token.boolean,
 .token.number {
   color: #ffc56d;
 }
+
 .token.attr-name,
 .token.string {
   color: #ffc56d;
 }
+
 .token.entity,
 .token.url,
 .language-css .token.string,
 .style .token.string {
   color: #ffc56d;
 }
+
 .token.selector {
   color: #ff8fa3;
 }
+
 .token.atrule,
 .token.attr-value,
 .token.keyword,
@@ -220,15 +261,17 @@ pre[class*='language-'] {
 .token.deleted {
   color: #ff8fa3;
 }
+
 .token.inserted {
   color: #b4ff9b;
 }
+
 .token.deleted:not(.prefix) {
   background: rgba(218, 54, 50, 0.2);
   color: inherit;
   display: block;
 }
-// ref: https://github.com/zenn-dev/zenn-editor/issues/148
+
 .token.prefix {
   user-select: none;
 }
@@ -247,39 +290,49 @@ pre[class*='language-'] {
 .token.statement {
   color: #ffc56d;
 }
+
 .token.placeholder,
 .token.variable {
   color: #fff;
 }
+
 .token.important,
 .token.statement,
 .token.bold {
   font-weight: 700;
 }
+
 .token.punctuation {
   color: #939bc1;
 }
+
 .token.entity {
   cursor: help;
 }
+
 .token.italic {
   font-style: italic;
 }
+
 .token.tag,
 .token.property,
 .token.function {
   color: #38c7ff;
 }
+
 .token.attr-name {
   color: #ff8fa3;
 }
+
 .token.attr-value {
   color: #ffc56d;
 }
+
 .token.style,
 .token.script {
   color: #ffc56d;
 }
+
 .token.script .token.keyword {
   color: #ffc56d;
 }

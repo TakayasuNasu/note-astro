@@ -10,6 +10,9 @@ import Layout from '@layouts/Layout.astro'
 // types
 import type { InsightSkeleton } from '@/lib/contentful'
 
+// components
+import BodyCopyHeader from '@/components/BodyCopyHeader.astro'
+
 // global style
 import '@/styles/global.css'
 import '@/styles/body-copy.scss'
@@ -31,15 +34,17 @@ export async function getStaticPaths() {
   const pages = entries.items.map(item => ({
     params: { slug: item.fields.slug },
     props: {
+      slug: item.fields.slug,
       heading: item.fields.primaryHeading,
       heroImage: item.fields.heroImage as { fields: AssetFields },
       body: item.fields.body,
+      publishedDate: item.fields.publishedDate,
     },
   }))
 
   return pages
 }
-const { heading, heroImage, body } = Astro.props
+const { slug, heading, heroImage, body, publishedDate } = Astro.props
 const html = markdownHtml(body, {
   embedOrigin: 'https://embed.zenn.studio',
 })
@@ -51,10 +56,11 @@ const html = markdownHtml(body, {
       {
         heroImage.fields.file && (
           <Image
-            src={heroImage.fields.file.url}
+            src={`${heroImage.fields.file.url}?fm=webp`}
             width={heroImage.fields.file.details.image?.width || 200}
             height={heroImage.fields.file.details.image?.height || 100}
             alt={`Hero`}
+            format="webp"
             class="object-cover w-full h-full"
           />
         )
@@ -62,6 +68,8 @@ const html = markdownHtml(body, {
     </figure>
 
     <h1 class="font-bold">{heading}</h1>
+
+    <BodyCopyHeader {...{ slug, publishedDate }} />
 
     <div class="body-copy">
       <Fragment set:html={html} />

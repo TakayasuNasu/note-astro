@@ -16,10 +16,11 @@ const {
     {
       heroImage.fields.file && (
         <Image
-          src={heroImage.fields.file.url}
+          src={`${heroImage.fields.file.url}?fm=webp`}
           width={heroImage.fields.file.details.image?.width || 200}
           height={heroImage.fields.file.details.image?.height || 100}
           alt={`Hero`}
+          format="webp"
           class="object-cover w-full h-full"
         />
       )
