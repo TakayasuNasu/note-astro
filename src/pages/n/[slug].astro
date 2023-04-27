@@ -16,6 +16,7 @@ import BodyCopyHeader from '@/components/BodyCopyHeader.astro'
 // global style
 import '@/styles/global.css'
 import '@/styles/body-copy.scss'
+import { useLayoutEffect } from 'react'
 
 type MarkdownHtml = (text: string, options?: {}) => string
 type MarkdownHtmlAtBuild = { default: MarkdownHtml }
@@ -39,12 +40,13 @@ export async function getStaticPaths() {
       heroImage: item.fields.heroImage as { fields: AssetFields },
       body: item.fields.body,
       publishedDate: item.fields.publishedDate,
+      tags: item.fields.tags,
     },
   }))
 
   return pages
 }
-const { slug, heading, heroImage, body, publishedDate } = Astro.props
+const { slug, heading, heroImage, body, publishedDate, tags } = Astro.props
 const html = markdownHtml(body, {
   embedOrigin: 'https://embed.zenn.studio',
 })
@@ -61,6 +63,7 @@ const html = markdownHtml(body, {
             height={heroImage.fields.file.details.image?.height || 100}
             alt={`Hero`}
             format="webp"
+            loading="eager"
             class="object-cover w-full h-full"
           />
         )
@@ -74,6 +77,20 @@ const html = markdownHtml(body, {
     <div class="body-copy">
       <Fragment set:html={html} />
     </div>
+
+    {
+      tags && (
+        <ul class="tags flex flex-wrap">
+          {tags.map((tag: string) => {
+            return (
+              <li>
+                <a href="">#{tag}</a>
+              </li>
+            )
+          })}
+        </ul>
+      )
+    }
   </article>
 </Layout>
 
@@ -90,6 +107,7 @@ const html = markdownHtml(body, {
       width: 620px;
     }
   }
+
   figure {
     margin-inline: calc(50% - 50vw);
     aspect-ratio: 39/20;
@@ -107,5 +125,27 @@ const html = markdownHtml(body, {
 
   div.body-copy {
     margin-top: 36px;
+  }
+
+  ul.tags {
+    gap: 8px;
+    margin-top: 36px;
+
+    @media (min-width: 768px) {
+      margin-top: 48px;
+    }
+
+    a {
+      padding: 4px 10px;
+      font-size: 14px;
+      color: var(--accent-dark);
+      border: solid 1px var(--accent-dark);
+
+      &:hover {
+        color: var(--accent-light);
+        border: solid 1px var(--accent-light);
+        transition: 0.4s;
+      }
+    }
   }
 </style>

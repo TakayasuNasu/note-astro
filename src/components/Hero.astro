@@ -6,7 +6,14 @@ import hero from '@/assets/images/hero01.png'
 ---
 
 <figure>
-  <Image src={hero.src} width={hero.width} height={hero.height} alt={`Hero`} class="object-cover w-full h-full" />
+  <Image
+    src={hero.src}
+    width={hero.width}
+    height={hero.height}
+    alt={`Hero`}
+    class="object-cover w-full h-full"
+    loading="eager"
+  />
 </figure>
 
 <style lang="scss">

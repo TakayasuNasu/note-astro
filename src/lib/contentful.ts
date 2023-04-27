@@ -20,6 +20,7 @@ export interface InsightSkeleton {
     primaryHeading: EntryFieldTypes.Text
     publishedDate: EntryFieldTypes.Date
     body: EntryFieldTypes.Text
+    tags: Array<EntryFieldTypes.Text>
   }
 }
 
