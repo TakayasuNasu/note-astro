@@ -1,0 +1,71 @@
+---
+import type { Post } from '@/lib/contentful'
+import { Image } from 'astro:assets'
+
+interface Posts extends Array<Post> {}
+
+export interface Props {
+  posts: Posts
+}
+
+let { posts } = Astro.props
+---
+<dl class="others-list">
+  <dt class="font-bold">Other Insights</dt>
+
+  <dd class="my-6">
+    <ul class="grid gap-y-4">
+      {posts.map(post => {
+        return (
+          <li>
+            <a href="" class="item flex">
+              <p class="post-title">{post.primaryHeading}</p>  
+              <figure class="hero">
+                {post.heroImage?.fields.file && (
+                  <Image
+                    src={`${post.heroImage.fields.file.url}?fm=webp`}
+                    width={post.heroImage.fields.file.details.image?.width || 200}
+                    height={post.heroImage.fields.file.details.image?.height || 100}
+                    alt={`Hero`}
+                    format="webp"
+                    class="object-cover w-full h-full"
+                  />
+                )}
+              </figure>
+            </a>
+          </li>
+        )
+      })}
+    </ul>
+  </dd>
+</dl>
+
+<style lang="scss">
+  dl.others-list {
+    margin-block: 32px;
+    padding-block: 32px;
+    border-top: solid 1px var(--sub-text-colour);
+  }
+
+  a.item {
+    color: var(--text-colour);
+  }
+
+  p.post-title {
+    flex: 4;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+
+    @media (min-width: 768px) {
+      flex: 6;
+    }
+  }
+
+  figure.hero {
+    margin-left: 8px;
+    flex: 1;
+  }
+</style>

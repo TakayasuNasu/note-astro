@@ -1,29 +1,28 @@
 <h1 align="center">
-  <a href="https://note-astro.vercel.app/" target="_blank">
+  <a href="https://blog.i-nasu.com/">
     My Note by Astro
   </a>
 </h1>
 
-## 🚀 Project Structure
+This project uses:
 
-Inside of your Astro project, you'll see the following folders and files:
+- Astro
+- React
+- TypeScript
+- Tailwind
 
-```
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## What is Astro?
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### Documentation → [https://docs.astro.build/en/getting-started/](https://docs.astro.build/en/getting-started/)
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Astro is an all-in-one web framework for building fast, content-focused websites.
 
-Any static assets, like images, can be placed in the `public/` directory.
+### What is an Astro Island?
 
-## 🧞 Commands
+Astro Islands (aka Component Islands) are a pattern of web architecture pioneered by Astro. 
+The term “Astro Island” refers to an interactive UI component on an otherwise static page of HTML. Multiple islands can exist on a page, and an island always renders in isolation. Think of them as islands in a sea of static, non-interactive HTML.
+
+## Commands
 
 All commands are run from the root of the project, from a terminal:
 
@@ -36,6 +35,3 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

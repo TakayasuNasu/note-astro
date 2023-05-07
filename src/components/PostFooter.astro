@@ -1,0 +1,124 @@
+---
+import { Icon } from 'astro-icon'
+---
+
+<section id="post-footer" class="post-footer hidden lg:block">
+  <div class="inner">
+    <ul class="icons flex items-center ml-auto w-1/3">
+      <li>
+        <a
+          href="javascript:void(0);"
+          data-url={Astro.url}
+          class="copy relative">
+          <Icon name="mdi:content-copy" />
+        </a>
+        <span class="absolute">Copied</span>
+      </li>
+
+      <li>
+        <a href={`http://www.facebook.com/share.php?u=${Astro.url}`} rel="noreferrer noopener" target="_blank">
+          <Icon name="ic:baseline-facebook" />
+        </a>
+      </li>
+
+      <li>
+        <a href={`https://twitter.com/share?url=${Astro.url}`} rel="noreferrer noopener" target="_blank">
+          <Icon name="mdi:twitter" />
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style lang="scss">
+  section.post-footer {
+    position: sticky;
+    bottom: 0;
+    margin-top: 48px;
+    padding-block: 20px;
+    background-color: var(--sub-bg-colour);
+    transition: 0.4s;
+
+    &.sticky-hide {
+      position: static;
+      bottom: -76px;
+    }
+  }
+
+  div.inner {
+    margin-inline: auto;
+    width: 94%;
+
+    @media (min-width: 768px) {
+      width: 688px;
+    }
+
+    @media (min-width: 1024px) {
+      width: 620px;
+    }
+  }
+
+  ul.icons {
+    column-gap: 8px;
+
+    @media (min-width: 768px) {
+      column-gap: min(4.8vw, 68px);
+    }
+
+    li {
+      flex: 1;
+    }
+
+    a {
+      color: var(--text-colour);
+    }
+  }
+
+  a.copy {
+    &.show {
+      + span {
+        max-height: 50px;
+        opacity: 1;
+        transition: .04s;
+      }
+    }
+
+    + span {
+      color: var(--accent-light);
+      opacity: 0;
+      transition: .04s;
+    }
+  }
+</style>
+
+<script>
+  const copy = document.querySelectorAll('a.copy')[0]
+  copy.addEventListener('click', () => {
+    const text = copy.getAttribute('data-url')
+    if (text) {
+      navigator.clipboard.writeText(text)
+      copy.classList.add('show')
+      setTimeout(() => {
+        copy.classList.remove('show')
+      }, 1000);
+    }
+  })
+
+  const postFooter = document.getElementById('post-footer')
+  let scrollPoint = 0
+  let lastPoint = 0
+
+  window.addEventListener('scroll', () => {
+    if (!postFooter) return
+
+    scrollPoint = window.scrollY
+
+    if (scrollPoint > lastPoint) {
+    postFooter.classList.add('sticky-hide')
+    } else {
+      postFooter.classList.remove('sticky-hide')
+    }
+
+    lastPoint = scrollPoint
+  })
+</script>

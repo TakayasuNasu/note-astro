@@ -5,7 +5,7 @@ import { Image } from 'astro:assets'
 import logo from '@/assets/images/logo-light.svg'
 ---
 
-<header>
+<header id="global-header">
   <ul class="nav">
     <li class="logo">
       <a href="/" class="logo inline-block">
@@ -19,6 +19,9 @@ import logo from '@/assets/images/logo-light.svg'
 
 <style lang="scss">
   header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
     padding-block: 20px;
     padding-inline: 16px;
 
@@ -27,5 +30,31 @@ import logo from '@/assets/images/logo-light.svg'
     }
 
     background-color: var(--sub-bg-colour);
+    transition: 0.4s;
+
+    &.sticky-hide {
+      position: static;
+      top: -76px;
+    }
   }
 </style>
+
+<script>
+const globalHeader = document.getElementById('global-header')
+let scrollPoint = 0
+let lastPoint = 0
+
+window.addEventListener('scroll', () => {
+  if (!globalHeader) return
+
+  scrollPoint = window.scrollY
+
+  if (scrollPoint > lastPoint) {
+    globalHeader.classList.add('sticky-hide')
+  } else {
+    globalHeader.classList.remove('sticky-hide')
+  }
+
+  lastPoint = scrollPoint
+})
+</script>

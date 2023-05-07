@@ -12,6 +12,8 @@ import type { InsightSkeleton } from '@/lib/contentful'
 
 // components
 import BodyCopyHeader from '@/components/BodyCopyHeader.astro'
+import PostFooter from '@components/PostFooter.astro'
+import PostOthers from '@components/PostOthers.astro'
 
 // global style
 import '@/styles/global.css'
@@ -31,21 +33,29 @@ export async function getStaticPaths() {
     content_type: 'insight',
   })
 
-  const pages = entries.items.map(item => ({
-    params: { slug: item.fields.slug },
-    props: {
+  const pages = entries.items.map(item => {
+    const others = entries.items
+      .filter(insight => insight.fields.slug !== item.fields.slug)
+      .slice(0,3).map(d => d.fields)
+
+    return {
+      params: { slug: item.fields.slug },
+      props: {
       slug: item.fields.slug,
       heading: item.fields.primaryHeading,
       heroImage: item.fields.heroImage as { fields: AssetFields },
       body: item.fields.body,
       publishedDate: item.fields.publishedDate,
       tags: item.fields.tags,
+      others: others,
     },
-  }))
+    }
+  })
 
   return pages
 }
-const { slug, heading, heroImage, body, publishedDate, tags } = Astro.props
+
+const { slug, heading, heroImage, body, publishedDate, tags, others } = Astro.props
 const html = markdownHtml(body, {
   embedOrigin: 'https://embed.zenn.studio',
 })
@@ -53,7 +63,7 @@ const html = markdownHtml(body, {
 
 <Layout title={`${heading} | Takayasu Nasu | insight`} description="">
   <article>
-    <figure>
+    <figure class="hero">
       {
         heroImage.fields.file && (
           <Image
@@ -90,7 +100,11 @@ const html = markdownHtml(body, {
         </ul>
       )
     }
+
+    <PostOthers posts={others} />
   </article>
+
+  <PostFooter />
 </Layout>
 
 <style lang="scss">
@@ -107,8 +121,8 @@ const html = markdownHtml(body, {
     }
   }
 
-  figure {
-    margin-inline: calc(50% - 50vw);
+  figure.hero {
+    margin: 0 calc(50% - 50vw);
     aspect-ratio: 39/20;
 
     @media (min-width: 1024px) {
