@@ -9,13 +9,23 @@ export interface Props {
 }
 
 let { posts } = Astro.props
-const maped = posts.map((data, i) => ({ i, value: data.featured }))
+const maped = posts.map((data, i) => ({
+   i,
+   value: data.featured,
+   date: data.publishedDate || Date(),
+  }))
+
 posts = maped
   .sort((a, b) => {
-    if (a.value) return -1
+    if (new Date(a.date) < new Date(b.date)) return 1
+    if (new Date(a.date) > new Date(b.date)) return -1
     return 0
   })
   .map(v => posts[v.i])
+
+const featured = posts.filter(p => p.featured)
+const unFeatured = posts.filter(p => !p.featured)
+posts = [...featured, ...unFeatured]
 ---
 
 <ul class="timeline grid gap-6">

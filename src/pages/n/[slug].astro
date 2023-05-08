@@ -11,6 +11,7 @@ import Layout from '@layouts/Layout.astro'
 import type { InsightSkeleton } from '@/lib/contentful'
 
 // components
+import Info from '@/components/Info.astro'
 import BodyCopyHeader from '@/components/BodyCopyHeader.astro'
 import PostFooter from '@components/PostFooter.astro'
 import PostOthers from '@components/PostOthers.astro'
@@ -62,6 +63,9 @@ const html = markdownHtml(body, {
 ---
 
 <Layout title={`${heading} | Takayasu Nasu | insight`} description="">
+  <aside class="info hidden xl:block fixed">
+    <Info {...{ type: 'single', createBy: '那須 毅康(Takayasu Nasu - Tack)' }} />
+  </aside>
   <article>
     <figure class="hero">
       {
@@ -108,6 +112,10 @@ const html = markdownHtml(body, {
 </Layout>
 
 <style lang="scss">
+  aside.info {
+    width: 280px;
+  }
+
   article {
     margin-inline: auto;
     width: 94%;

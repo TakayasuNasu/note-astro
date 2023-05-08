@@ -12,12 +12,12 @@ export interface Props {
 const { type, createBy } = Astro.props
 ---
 
-<div class="card">
+<div class="card" data-type={type}>
   <ul class="info-list grid">
     <li class="buttons"></li>
 
     <li class="heading">
-      <dl data-type={type} class="grid">
+      <dl data-type={type} class="grid items-center">
         <dt>
           <figure class="rounded-full overflow-hidden w-max">
             <Image src={face.src} width={64} height={64} alt={`Insight`} />
@@ -30,7 +30,7 @@ const { type, createBy } = Astro.props
     </li>
 
     <li class="desc">
-      <p>
+      <p data-type={type}>
         あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波
       </p>
     </li>
@@ -43,8 +43,16 @@ const { type, createBy } = Astro.props
 
 <style lang="scss">
   div.card {
+    padding: 8px;
+
     @media (min-width: 1024px) {
-      border: solid 1px var(--border-colour);
+      padding: 16px;
+    }
+
+    &[data-type='index'] {
+      @media (min-width: 1024px) {
+        border: solid 1px var(--border-colour);
+      }
     }
   }
 
@@ -59,11 +67,24 @@ const { type, createBy } = Astro.props
 
   dl {
     row-gap: 16px;
+
+    &[data-type='single'] {
+      display: flex;
+      column-gap: 8px;
+
+      h1 {
+        font-size: 16px;
+      }
+    }
   }
 
   li.desc {
     p {
       font-size: 14px;
+
+      &[data-type='single'] {
+        font-size: 12px;
+      }
     }
   }
 </style>
