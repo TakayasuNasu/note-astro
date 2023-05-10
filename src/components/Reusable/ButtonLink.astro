@@ -1,0 +1,46 @@
+---
+import { Icon } from 'astro-icon'
+
+export interface Props {
+  href?: string | undefined;
+  target?: '_self' | '_blank' | undefined;
+  type?: string | undefined;
+}
+const { href, target, type } = Astro.props
+---
+<a href={href} target={target} class="button-link inline-flex rounded-sm">
+  <p class="flex items-center justify-center">
+    <slot />
+    {type == 'external' && (
+      <span class=""><Icon name="ri:external-link-line" /></span>
+    )}
+  </p>
+</a>
+
+<style lang="scss">
+  a.button-link {
+    padding-inline: 12px;
+    min-height: 32px;
+    color: var(--text-colour);
+    background-color: var(--accent-dark);
+    transition: 0.4s;
+
+    &:hover {
+      background-color: var(--accent-light);
+
+      p {
+        color: var(--background-colour);
+      }
+    }
+
+    > p {
+      font-size: 12px;
+      transition: 0.4s;
+    }
+
+    span {
+      margin-left: 4px;
+      width: 14px;
+    }
+  }
+</style>

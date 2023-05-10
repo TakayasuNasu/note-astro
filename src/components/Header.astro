@@ -1,18 +1,28 @@
 ---
 import { Image } from 'astro:assets'
 
+// components
+import ButtonLink from '@/components/Reusable/ButtonLink.astro';
+
 // assets
 import logo from '@/assets/images/logo-light.svg'
 ---
 
 <header id="global-header">
-  <ul class="nav">
+  <ul class="nav flex justify-between">
     <li class="logo">
       <a href="/" class="logo inline-block">
         <figure class="w-max">
           <Image src={logo.src} width={86} height={20} alt={`Insight`} />
         </figure>
       </a>
+    </li>
+
+    <li>
+      <ButtonLink
+        href="https://www.i-nasu.com/"
+        target="_blank"
+        type="external">Creative</ButtonLink>
     </li>
   </ul>
 </header>
@@ -22,10 +32,11 @@ import logo from '@/assets/images/logo-light.svg'
     position: sticky;
     top: 0;
     z-index: 1;
-    padding-block: 20px;
+    padding-block: 12px;
     padding-inline: 16px;
 
     @media (min-width: 768px) {
+      padding-block: 20px;
       padding-inline: 24px;
     }
 

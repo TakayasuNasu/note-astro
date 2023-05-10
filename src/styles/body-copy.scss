@@ -79,6 +79,15 @@ th {
   background-color: var(--accent-dark);
 }
 
+blockquote {
+  padding-left: 0.7em;
+  border-left: solid 3px var(--accent-light);
+
+  > p {
+    font-size: 0.97em;
+  }
+}
+
 code,
 .code-block-filename {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace,
