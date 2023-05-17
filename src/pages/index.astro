@@ -28,7 +28,7 @@ const entriesInsight = await contentfulClient.getEntries<InsightSkeleton>({
 })
 
 const posts = entriesInsight.items.map(item => {
-  const { name, slug, heroImage, featured, primaryHeading, publishedDate } = item.fields
+  const { name, slug, heroImage, featured, primaryHeading, publishedDate, excerpt } = item.fields
   return {
     name,
     slug,
@@ -36,6 +36,7 @@ const posts = entriesInsight.items.map(item => {
     featured,
     primaryHeading,
     publishedDate,
+    excerpt,
   }
 })
 ---

@@ -19,6 +19,7 @@ export interface InsightSkeleton {
     featured: EntryFieldTypes.Boolean
     primaryHeading: EntryFieldTypes.Text
     publishedDate: EntryFieldTypes.Date
+    excerpt: EntryFieldTypes.Text
     body: EntryFieldTypes.Text
     tags: Array<EntryFieldTypes.Text>
   }
@@ -29,6 +30,7 @@ export interface Post {
   featured: boolean
   heroImage: { fields: AssetFields }
   primaryHeading: string
+  excerpt: string
   publishedDate: `${number}-${number}-${number}T${number}:${number}:${number}Z`
 }
 

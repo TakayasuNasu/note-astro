@@ -4,14 +4,16 @@ import type { Post } from '@/lib/contentful'
 
 export interface Props {
   post: Post
+  type?: 'large' | 'small'
 }
 
 const {
-  post: { slug, primaryHeading, heroImage },
+  post: { slug, primaryHeading, heroImage, excerpt },
+  type
 } = Astro.props
 ---
 
-<a href={`/n/${slug}`} class="grid">
+<a href={`/n/${slug}`} class="card grid h-full content-start" data-type={type}>
   <figure>
     {
       heroImage.fields.file && (
@@ -26,16 +28,46 @@ const {
       )
     }
   </figure>
-  <h3>{primaryHeading}</h3>
-  <p></p>
+  <ul class="wrapper">
+    <li>
+      <h3 class="font-bold">{primaryHeading}</h3>
+    </li>
+
+    <li class="mt-2">
+      <p class="excerpt">{excerpt}</p>
+    </li>
+  </ul>
 </a>
 
 <style lang="scss">
-  a {
+  a.card {
     row-gap: 16px;
 
     * {
       color: var(--text-colour);
+    }
+
+    &[data-type='large'] {
+      @media (min-width: 768px) {
+        grid-template-columns: 2fr 1fr;
+        column-gap: 12px;
+      }
+
+      h3 {
+        -webkit-line-clamp: 3;
+        font-size: var(--font-size-huge);
+      }
+
+      p.excerpt {
+        -webkit-line-clamp: 3;
+      }
+    }
+
+    &:hover {
+      figure {
+        transition: 0.4s;
+        opacity: 0.8;
+      }
     }
   }
 
@@ -44,6 +76,17 @@ const {
   }
 
   h3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
     font-size: var(--font-size-large);
+  }
+
+  p.excerpt {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
   }
 </style>
