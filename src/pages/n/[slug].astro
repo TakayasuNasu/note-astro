@@ -44,6 +44,7 @@ export async function getStaticPaths() {
       props: {
       slug: item.fields.slug,
       heading: item.fields.primaryHeading,
+      excerpt: item.fields.excerpt,
       heroImage: item.fields.heroImage as { fields: AssetFields },
       body: item.fields.body,
       publishedDate: item.fields.publishedDate,
@@ -56,13 +57,19 @@ export async function getStaticPaths() {
   return pages
 }
 
-const { slug, heading, heroImage, body, publishedDate, tags, others } = Astro.props
+const { slug, heading, excerpt, heroImage, body, publishedDate, tags, others } = Astro.props
 const html = markdownHtml(body, {
   embedOrigin: 'https://embed.zenn.studio',
 })
+const layoutProps = {
+  title: `${heading} | Takayasu Nasu | insight`,
+  description: excerpt,
+  path: `n/${slug}`,
+  image: heroImage.fields.file.url
+}
 ---
 
-<Layout title={`${heading} | Takayasu Nasu | insight`} description="">
+<Layout {...layoutProps}>
   <aside class="info hidden xl:block fixed">
     <Info {...{ type: 'single', createBy: '那須 毅康(Takayasu Nasu - Tack)' }} />
   </aside>
