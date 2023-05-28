@@ -12,7 +12,7 @@ export interface Props {
   image?: string | undefined
 }
 const { title, description, path, image } = Astro.props
-const ogImage = image || defaultImage.src
+const ogImage = image || '//blog.i-nasu.com/_astro/hero01.0d046b1d.webp'
 const url = `https://blog.i-nasu.com/${path || ''}`
 ---
 
@@ -28,14 +28,14 @@ const url = `https://blog.i-nasu.com/${path || ''}`
     <meta property="og:type" content="article" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={`https:${ogImage}`} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@nytimesbits" />
     <meta name="twitter:site" content="@taka727" />
     <meta name="twitter:creator" content="@taka727" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:descriptio" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={`https:${ogImage}`} />
     <script is:inline src="https://embed.zenn.studio/js/listen-embed-event.js"></script>
   </head>
 
