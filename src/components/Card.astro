@@ -11,20 +11,25 @@ const {
   post: { slug, primaryHeading, heroImage, excerpt },
   type
 } = Astro.props
+const imageQuery = type == 'large' ? '614' : '296'
 ---
 
 <a href={`/n/${slug}`} class="card grid h-full content-start" data-type={type}>
   <figure>
     {
       heroImage.fields.file && (
-        <Image
-          src={`${heroImage.fields.file.url}?fm=webp`}
-          width={heroImage.fields.file.details.image?.width || 200}
-          height={heroImage.fields.file.details.image?.height || 100}
-          alt={`Hero`}
-          format="webp"
-          class="object-cover w-full h-full"
-        />
+        <picture>
+          <source media="(min-width: 768px)" srcset={`${heroImage.fields.file.url}?fm=webp&w=${imageQuery}`} />
+          <Image
+            src={`${heroImage.fields.file.url}?fm=webp&w=416`}
+            width='416'
+            height='234'
+            alt={`Hero`}
+            format="webp"
+            loading={type == 'large' ? 'eager' : 'lazy'}
+            class="object-cover w-full h-full"
+          />
+        </picture>
       )
     }
   </figure>
