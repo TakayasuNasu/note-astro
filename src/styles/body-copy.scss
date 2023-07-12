@@ -7,9 +7,20 @@ div.body-copy {
     }
   }
 
-  h2, h3, h4,h5,h6 {
-    font-size: var(--heading-size-large);
+  h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
+  }
+
+  h2 {
+    font-size: var(--heading-size-large);
+  }
+
+  h3 {
+    font-size: var(--heading-size-medium);
+  }
+
+  h4, h5, h6 {
+    font-size: var(--heading-size-small);
   }
 
   p {
