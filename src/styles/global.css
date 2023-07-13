@@ -13,8 +13,9 @@ html {
   --font-size-medium: 14px;
   --font-size-large: 16px;
   --font-size-huge: 18px;
+  --heading-size-tiny: 16px;
   --heading-size-small: 20px;
-  --heading-size-medium: 20px;
+  --heading-size-medium: 24px;
   --heading-size-large: clamp(18px, 22 / 426 * 100vw, 22px);;
 }
 
@@ -33,6 +34,7 @@ html {
     --font-size-medium: 16px;
     --font-size-large: 18px;
     --font-size-huge: 20px;
+    --heading-size-tiny: 20px;
     --heading-size-small: 22px;
     --heading-size-medium: 26px;
     --heading-size-large: 28px;
