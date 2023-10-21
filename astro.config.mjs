@@ -7,7 +7,4 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: 'https://blog.i-nasu.com',
   integrations: [react(), tailwind(), sitemap()],
-  experimental: {
-    assets: true
-  }
 });
